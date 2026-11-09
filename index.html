@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>libre — Manual de identidad visual</title>
+<link rel="icon" href="/src/assets/logo-libre.svg" type="image/svg+xml">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#12181A;
+  --panel:#1B2224;
+  --card:rgba(255,255,255,.05);
+  --line-soft: rgba(255,255,255,.12);
+  --text:#EDEEEC;
+  --text-dim:#9BA0A3;
+  --white-ball:#F3F1EC;
+  --red-ball:#DB4B3E;
+  --yellow-ball:#EFB53F;
+  --graphite:#6B7075;
+  --graphite-dark:#3F4245;
+  --light:#FBFAF7;
+  --display:'Poppins', system-ui, sans-serif;
+  --body:'Inter', system-ui, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{
+  height:100%; margin:0; overflow:hidden;
+  font-family:var(--body); color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  background:var(--ink);
+  background-image: url('/src/assets/fondo-club.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top left, rgba(219,75,62,.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(239,181,63,.16), transparent 24%),
+    linear-gradient(120deg, rgba(12,15,17,.55), rgba(12,15,17,.2));
+  pointer-events:none;
+}
+body::after{
+  content:"LIBRE / IDENTIDAD VISUAL";
+  position:fixed;
+  left:clamp(16px,3vw,42px);
+  bottom:clamp(16px,3vh,30px);
+  z-index:450;
+  color:rgba(238,239,236,.42);
+  font-size:.64rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  pointer-events:none;
+}
+h1,h2,h3,.display{ font-family:var(--display); }
+a{ color:inherit; }
+::selection{ background:var(--red-ball); color:var(--light); }
+a:focus-visible, button:focus-visible{ outline:3px solid var(--yellow-ball); outline-offset:3px; }
+
+#app{ position:relative; width:100vw; height:100vh; height:100dvh; overflow:hidden; }
+.panel{ position:absolute; inset:0; opacity:0; visibility:hidden; pointer-events:none; background:linear-gradient(180deg, rgba(12,15,17,.42), rgba(12,15,17,.58)); }
+.panel.active{ opacity:1; visibility:visible; pointer-events:auto; }
+.panel-inner{
+  height:100%; width:100%; overflow-y:auto; overflow-x:hidden;
+  padding: clamp(28px,6vh,72px) 0 clamp(40px,8vh,90px);
+  scrollbar-width:thin;
+}
+.panel:not(#p0) .panel-inner{ display:flex; align-items:center; }
+.panel:not(#p0) .panel-inner > .container{ width:100%; }
+.panel[id="p6"] .panel-inner,
+.panel[id="p7"] .panel-inner,
+.panel[id="p8"] .panel-inner{ align-items:flex-start; }
+.panel[id="p6"] .panel-inner > .container,
+.panel[id="p7"] .panel-inner > .container,
+.panel[id="p8"] .panel-inner > .container{ margin-top:clamp(12px,3vh,34px); }
+.panel-inner::-webkit-scrollbar{ width:8px; }
+.panel-inner::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.15); border-radius:8px; }
+
+.bg-ink{ background:rgba(18,24,26,.58); }
+.bg-panel{ background:rgba(27,34,36,.64); }
+.bg-light{ background:var(--light); color:#20272A; }
+
+.eyebrow-tag{
+  display:inline-flex; align-items:center; gap:.5em;
+  font-size:.95rem; font-weight:600; opacity:.65; margin-bottom:.6rem;
+}
+.eyebrow-tag .dot{ width:8px; height:8px; border-radius:50%; background:currentColor; }
+
+.section-title{
+  font-weight:600; line-height:1.06; letter-spacing:-.01em;
+  font-size:clamp(2.1rem, 5vw, 3.4rem); margin-bottom:.5rem;
+  color:var(--white-ball);
+  text-wrap:balance;
+}
+.section-lede{ font-size:clamp(1.05rem,1.6vw,1.25rem); line-height:1.55; max-width:62ch; color:var(--text-dim); }
+.panel:not(#p0)::after{
+  position:absolute;
+  top:clamp(22px,4vh,48px);
+  right:clamp(64px,8vw,150px);
+  color:rgba(239,181,63,.62);
+  font-family:var(--display);
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.18em;
+}
+#p1::after{content:"01 / 10";} #p2::after{content:"02 / 10";}
+#p3::after{content:"03 / 10";} #p4::after{content:"04 / 10";}
+#p5::after{content:"05 / 10";} #p6::after{content:"06 / 10";}
+#p7::after{content:"07 / 10";} #p8::after{content:"08 / 10";}
+#p9::after{content:"09 / 10";}
+
+.hero-wrap{ height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; }
+.hero-mark{ width:clamp(260px,34vw,420px); margin-bottom:clamp(20px,3.4vh,34px); filter: drop-shadow(0 18px 34px rgba(0,0,0,.45)); }
+.hero-sub{ margin-top:16px; font-size:clamp(1.02rem,1.9vw,1.3rem); max-width:44ch; color:var(--text-dim); }
+.hero-hint{ position:absolute; bottom:clamp(20px,4vh,40px); left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; font-size:.92rem; color:var(--text-dim); }
+.hero-hint svg{ animation: hintBob 1.8s ease-in-out infinite; }
+@keyframes hintBob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+#dotnav{ position:fixed; right:clamp(14px,2.4vw,34px); top:50%; transform:translateY(-50%); z-index:500; display:flex; flex-direction:column; gap:14px; align-items:flex-end; }
+#dotnav button{ background:none; border:none; padding:4px 2px; display:flex; align-items:center; gap:10px; cursor:pointer; color:var(--text-dim); opacity:.55; }
+#dotnav button .label{ font-size:.78rem; font-weight:600; white-space:nowrap; opacity:0; transform:translateX(6px); transition:opacity .2s ease, transform .2s ease; }
+#dotnav button:hover .label{ opacity:1; transform:translateX(0); }
+#dotnav button .pip{ width:8px; height:8px; border-radius:50%; background:currentColor; transition:all .25s ease; flex-shrink:0; }
+#dotnav button.active{ opacity:1; color:var(--yellow-ball); }
+#dotnav button.active .pip{ width:10px; height:10px; box-shadow:0 0 0 3px rgba(239,181,63,.25); }
+@media (max-width:767px){ #dotnav{ right:10px; gap:10px; } #dotnav button .label{ display:none; } }
+
+.divider{ width:100%; height:1px; background:var(--line-soft); margin:1.6rem 0; }
+.card-flat{ border:1.5px solid var(--line-soft); background:var(--card); border-radius:14px; padding:1.4rem; height:100%; }
+
+.value-item{ padding:.2rem 0; }
+.value-item h3{ font-size:1.35rem; margin:0 0 .35rem; font-weight:600; }
+.value-item p{ margin:0; color:var(--text-dim); font-size:.98rem; line-height:1.5; }
+
+.logo-stage{ position:relative; display:inline-flex; align-items:center; justify-content:center; padding:34px; }
+.logo-stage::before{ content:""; position:absolute; inset:0; border:1.5px dashed rgba(255,255,255,.25); border-radius:18px; }
+.logo-stage img{ width:clamp(220px,26vw,340px); display:block; }
+.x-label{ position:absolute; bottom:-2px; right:6px; transform:translateY(100%); font-size:.78rem; font-weight:600; color:var(--text-dim); }
+
+.swatch{ border-radius:16px; padding:1.3rem 1.2rem; height:150px; display:flex; flex-direction:column; justify-content:flex-end; border:1.5px solid var(--line-soft); }
+.swatch .name{ font-weight:600; font-size:1.02rem; }
+.swatch .codes{ font-size:.82rem; opacity:.75; margin-top:2px; }
+
+.type-specimen-display{ font-family:var(--display); font-size:clamp(4rem,9vw,7.5rem); line-height:.9; font-weight:600; }
+.type-weight-row{ display:flex; gap:1.4rem; flex-wrap:wrap; margin-top:1rem; }
+.type-weight-row span{ font-family:var(--display); font-size:1.6rem; }
+.type-specimen-body p{ font-size:1.08rem; line-height:1.65; max-width:56ch; color:var(--text-dim); }
+
+.usage-card{ border-radius:14px; padding:1.3rem; border:1.5px solid var(--line-soft); background:var(--card); height:100%; }
+.usage-card .stamp{ width:76px; margin-bottom:.9rem; }
+.usage-card .verdict{ font-weight:600; font-size:.82rem; display:inline-flex; align-items:center; gap:6px; margin-bottom:.35rem; }
+.verdict.ok{ color:#5FC48A; }
+.verdict.no{ color:#E37367; }
+.usage-card p{ margin:0; font-size:.92rem; color:var(--text-dim); }
+
+.texture-strip{
+  height:110px; border-radius:16px; border:1.5px solid var(--line-soft);
+  background-image:
+    radial-gradient(circle, var(--white-ball) 7px, transparent 8px),
+    radial-gradient(circle, var(--red-ball) 7px, transparent 8px),
+    radial-gradient(circle, var(--yellow-ball) 7px, transparent 8px);
+  background-size: 58px 58px;
+  background-position: 0 10px, 20px 34px, 40px 4px;
+  background-color: var(--panel);
+}
+.icon-tile{ display:flex; flex-direction:column; align-items:center; gap:.6rem; text-align:center; }
+.icon-tile svg{ width:46px; height:46px; }
+.icon-tile span{ font-size:.85rem; font-weight:600; color:var(--text-dim); }
+
+.app-card{ border-radius:16px; border:1.5px solid var(--line-soft); overflow:hidden; height:100%; display:flex; flex-direction:column; background:var(--card); }
+.app-preview{ height:170px; display:flex; align-items:center; justify-content:center; position:relative; }
+.app-label{ padding:.85rem 1rem 1.1rem; font-weight:600; font-size:.95rem; }
+
+.closing-line{ font-size:clamp(1.8rem,4.2vw,3rem); font-weight:600; line-height:1.15; max-width:16ch; }
+.btn-carambola{ display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.3rem; border-radius:999px; border:1.5px solid currentColor; font-weight:600; font-size:.92rem; text-decoration:none; transition:transform .15s ease; }
+.btn-carambola:hover{ transform:translateY(-2px); }
+footer.foot{ font-size:.85rem; opacity:.6; }
+
+#overlay{ position:fixed; inset:0; z-index:2000; pointer-events:none; opacity:0; }
+#overlay.show{ opacity:1; }
+.wipe-circle{ position:absolute; width:260vmax; height:260vmax; border-radius:50%; transform:translate(-50%,-50%) scale(0); will-change:transform; }
+.piece{ position:absolute; will-change:transform, opacity; opacity:0; }
+.ballpiece{ width:52px; height:52px; }
+.ballpiece svg{ width:100%; height:100%; display:block; }
+#cuePiece svg{ display:block; width:100%; height:100%; overflow:visible; }
+
+@media (prefers-reduced-motion: reduce){ .hero-hint svg{ animation:none; } }
+@media (max-width:767px){
+  body::after{display:none;}
+  .panel:not(#p0) .panel-inner{align-items:flex-start; padding-top:76px;}
+  .panel:not(#p0)::after{top:24px; right:56px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="dotnav" aria-label="Navegación de secciones">
+  <button data-i="0" class="active"><span class="pip"></span><span class="label">Inicio</span></button>
+  <button data-i="1"><span class="pip"></span><span class="label">Concepto</span></button>
+  <button data-i="2"><span class="pip"></span><span class="label">Símbolo</span></button>
+  <button data-i="3"><span class="pip"></span><span class="label">Variaciones</span></button>
+  <button data-i="4"><span class="pip"></span><span class="label">Paleta</span></button>
+  <button data-i="5"><span class="pip"></span><span class="label">Tipografía</span></button>
+  <button data-i="6"><span class="pip"></span><span class="label">Usos</span></button>
+  <button data-i="7"><span class="pip"></span><span class="label">Elementos</span></button>
+  <button data-i="8"><span class="pip"></span><span class="label">Aplicaciones</span></button>
+  <button data-i="9"><span class="pip"></span><span class="label">Contacto</span></button>
+</nav>
+
+<div id="app">
+  <section class="panel active bg-ink" id="p0">
+    <div class="panel-inner" style="overflow-y:hidden;">
+      <div class="hero-wrap">
+        <img src="/src/assets/logo-libre.svg" alt="Logo Libre" class="hero-mark">
+        <p class="hero-sub">El marcador digital de las carambolas. Hecho para la mesa, no para la oficina.</p>
+        <div class="hero-hint">
+          <span>Desliza para tirar</span>
+          <svg width="26" height="18" viewBox="0 0 26 18" fill="none"><path d="M13 1v13M13 14l-6-6M13 14l6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-panel" id="p1">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-7">
+            <div class="eyebrow-tag"><span class="dot"></span>Concepto de marca</div>
+            <h2 class="section-title">De dónde sale el nombre</h2>
+            <p class="section-lede">El billar libre es la disciplina de carambolas: una mesa sin troneras, tres bolas, y un solo objetivo — tocar las otras dos con la propia en un mismo golpe. Ahí no hay azar, hay cálculo. "Libre" también describe lo que la app quita de encima al jugador: la libreta, la tiza y el cálculo mental del tanteo.</p>
+            <p class="section-lede" style="margin-top:1rem;">libre nace dentro de los clubes, no al lado de ellos. Es la app que un jugador abre en su teléfono, apoyado en la mesa, para llevar la cuenta exacta de cada carambola sin interrumpir el juego.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="row gy-4">
+              <div class="col-12 col-sm-4 col-lg-12 value-item">
+                <h3>Precisión</h3>
+                <p>Cada carambola se registra al toque, sin margen de error ni discusión en la mesa.</p>
+              </div>
+              <div class="col-12 col-sm-4 col-lg-12 value-item">
+                <h3>Ritmo</h3>
+                <p>La app nunca interrumpe la partida. Un toque, y el juego sigue igual de rápido.</p>
+              </div>
+              <div class="col-12 col-sm-4 col-lg-12 value-item">
+                <h3>Club</h3>
+                <p>Pensada para vivir en las mesas de un club real, no en una oficina de diseño.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-ink" id="p2">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+          <div class="col-lg-8">
+            <div class="eyebrow-tag" style="justify-content:center;"><span class="dot"></span>El símbolo</div>
+            <h2 class="section-title">Un taco, tres bolas, una sola línea</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center mb-5">
+          <div class="col-auto">
+            <div class="logo-stage">
+              <img src="/src/assets/logo-libre.svg" alt="Logo Libre sobre guía de construcción">
+              <span class="x-label">las tres bolas comparten un mismo eje (X)</span>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card-flat">
+              <h3 style="font-size:1.15rem;">Una sola trayectoria</h3>
+              <p style="color:var(--text-dim); font-size:.95rem; margin:0;">El taco y las tres bolas se apoyan sobre un mismo eje diagonal — la línea de tiro de una carambola real.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-flat">
+              <h3 style="font-size:1.15rem;">Tamaño decreciente</h3>
+              <p style="color:var(--text-dim); font-size:.95rem; margin:0;">Cada bola es un 88% del tamaño de la anterior, dando sensación de profundidad y movimiento hacia la punta del taco.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-flat">
+              <h3 style="font-size:1.15rem;">Sin contorno</h3>
+              <p style="color:var(--text-dim); font-size:.95rem; margin:0;">Es un símbolo plano, sin trazos ni sombras — pensado para verse nítido en una pantalla pequeña, sobre la mesa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-panel" id="p3">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Variaciones</div>
+        <h2 class="section-title" style="margin-bottom:2rem;">Versiones y tamaño mínimo</h2>
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <div class="swatch bg-ink" style="justify-content:center; align-items:center;">
+              <img src="/src/assets/logo-libre.svg" style="width:112px;" alt="Versión a color completo">
+            </div>
+            <p style="margin-top:.6rem; font-weight:600; font-size:.9rem;">Color completo</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="swatch bg-ink" style="justify-content:center; align-items:center;">
+              <img src="/src/assets/monocromatica.svg" style="width:112px;" alt="Versión monocromática">
+            </div>
+            <p style="margin-top:.6rem; font-weight:600; font-size:.9rem;">Monocromática</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="swatch bg-light" style="justify-content:center; align-items:center;">
+              <img src="/src/assets/logo-libre.svg" style="width:112px;" alt="Versión clara para modo día">
+            </div>
+            <p style="margin-top:.6rem; font-weight:600; font-size:.9rem;">Clara, para modo día</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="swatch bg-ink" style="justify-content:center; align-items:center;">
+              <img src="/src/assets/logo-libre.svg" style="width:35px;" alt="Tamaño mínimo del símbolo">
+            </div>
+            <p style="margin-top:.6rem; font-weight:600; font-size:.9rem;">Mínimo: 35 px en pantalla</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-ink" id="p4">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Paleta de colores</div>
+        <h2 class="section-title" style="margin-bottom:2rem;">Los colores de la mesa</h2>
+        <div class="row g-3">
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--ink); color:var(--text);">
+              <div class="name">Grafito</div>
+              <div class="codes">#12181A — RGB 18,24,26</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--white-ball); color:#20272A;">
+              <div class="name">Bola blanca</div>
+              <div class="codes">#F3F1EC — RGB 243,241,236</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--red-ball);">
+              <div class="name">Bola roja</div>
+              <div class="codes">#DB4B3E — RGB 219,75,62</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--yellow-ball); color:#20272A;">
+              <div class="name">Bola amarilla</div>
+              <div class="codes">#EFB53F — RGB 239,181,63</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--graphite);">
+              <div class="name">Gris taco</div>
+              <div class="codes">#6B7075 — RGB 107,112,117</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="swatch" style="background:var(--panel); color:var(--text);">
+              <div class="name">Panel</div>
+              <div class="codes">#1B2224 — RGB 27,34,36</div>
+            </div>
+          </div>
+        </div>
+        <p class="section-lede" style="margin-top:1.6rem; max-width:70ch;">libre es una marca de modo oscuro: el grafito domina cada pantalla, como la mesa en un club con luz baja. Blanco, rojo y amarillo — los colores reales de las bolas de carambola — son siempre el acento, nunca el fondo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-panel" id="p5">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Tipografía</div>
+        <h2 class="section-title" style="margin-bottom:2rem;">Dos voces, un mismo tono</h2>
+        <div class="row g-5">
+          <div class="col-lg-6">
+            <div class="type-specimen-display">Aa</div>
+            <p style="font-weight:600; margin:.6rem 0 0;">Poppins — títulos, wordmark y marcadores en pantalla</p>
+            <div class="type-weight-row">
+              <span style="font-weight:400;">Regular</span>
+              <span style="font-weight:500;">Medium</span>
+              <span style="font-weight:600;">SemiBold</span>
+              <span style="font-weight:700;">Bold</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="type-specimen-body">
+              <p style="font-size:1.6rem; font-weight:600; font-family:var(--display); margin-bottom:.8rem;">Inter</p>
+              <p>Se usa en la interfaz de la app: números de marcador, nombres de jugadores, mensajes del sistema. Legible incluso en pantallas pequeñas y con poca luz, como la de un club por la noche.</p>
+            </div>
+            <div class="divider"></div>
+            <p style="font-weight:600; margin-bottom:.5rem;">Escala tipográfica</p>
+            <div class="row gy-1" style="font-size:.92rem; color:var(--text-dim); max-width:44ch;">
+              <div class="col-7">Marcador grande</div><div class="col-5">64 / 68</div>
+              <div class="col-7">Título de sección</div><div class="col-5">36 / 44</div>
+              <div class="col-7">Cuerpo</div><div class="col-5">17 / 26</div>
+              <div class="col-7">Etiqueta</div><div class="col-5">13 / 18</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-ink" id="p6">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Uso del símbolo</div>
+        <h2 class="section-title" style="margin-bottom:2rem;">Cómo se juega y cómo no</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/logo-libre.svg" alt="Logo en su proporción original">
+              <div class="verdict ok">✓ Correcto</div>
+              <p>Se respeta la proporción entre las tres bolas y el ángulo original del taco.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/logo-libre.svg" alt="Logo claro sobre fondo claro" style="background:var(--light); border-radius:10px; padding:8px;">
+              <div class="verdict ok">✓ Correcto</div>
+              <p>La versión clara se usa completa sobre fondos claros, sin mezclarla con la de color.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/logo-libre.svg" alt="Logo monocromático" style="background:var(--panel); border-radius:10px; padding:8px;">
+              <div class="verdict ok">✓ Correcto</div>
+              <p>La versión monocromática se aplica completa en grabados o impresión a un color.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/logo-libre.svg" alt="Logo rotado incorrectamente" style="transform:rotate(-35deg);">
+              <div class="verdict no">✗ Incorrecto</div>
+              <p>No se rota el símbolo. El eje del taco y las bolas siempre mantiene su ángulo.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/velde.svg" alt="Logo en color verde no permitido">
+              <div class="verdict no">✗ Incorrecto</div>
+              <p>No se cambia de color.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="usage-card">
+              <img class="stamp" src="/src/assets/logo-libre.svg" alt="Logo separado incorrectamente" style="transform:scale(1.1); filter:drop-shadow(8px 10px 6px rgba(0,0,0,.6));">
+              <div class="verdict no">✗ Incorrecto</div>
+              <p>No se separan las bolas del taco ni se añaden sombras o efectos de profundidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-panel" id="p7">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Elementos gráficos</div>
+        <h2 class="section-title" style="margin-bottom:1.6rem;">Lo que acompaña a la marca</h2>
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="texture-strip" role="img" aria-label="Textura de puntos blancos, rojos y amarillos sobre fondo grafito"></div>
+            <p style="font-size:.9rem; color:var(--text-dim); margin-top:.5rem;">Textura de apoyo para fondos de carga y pantallas vacías — nunca detrás de texto largo.</p>
+          </div>
+        </div>
+        <div class="row g-4 text-center">
+          <div class="col-6 col-md-3">
+            <div class="icon-tile">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="30" width="34" height="7" rx="3.5" transform="rotate(-32 6 30)" fill="var(--graphite)"/></svg>
+              <span>Taco</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="icon-tile">
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" fill="var(--red-ball)"/></svg>
+              <span>Bola</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="icon-tile">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="20" rx="4" fill="none" stroke="var(--text-dim)" stroke-width="2.4"/><text x="24" y="30" font-family="Poppins" font-size="14" fill="var(--yellow-ball)" text-anchor="middle" font-weight="600">42</text></svg>
+              <span>Contador</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="icon-tile">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="36" height="20" rx="3" fill="none" stroke="var(--text-dim)" stroke-width="2.4"/><circle cx="14" cy="24" r="2" fill="var(--white-ball)"/><circle cx="24" cy="24" r="2" fill="var(--red-ball)"/><circle cx="34" cy="24" r="2" fill="var(--yellow-ball)"/></svg>
+              <span>Mesa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-ink" id="p8">
+    <div class="panel-inner">
+      <div class="container">
+        <div class="eyebrow-tag"><span class="dot"></span>Aplicaciones</div>
+        <h2 class="section-title" style="margin-bottom:2rem;">La marca en la mesa</h2>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:var(--panel);">
+                <img src="/src/assets/app.jpeg" width="100%" height="170" style="object-fit:contain;" alt="Aplicación Libre para llevar el marcador">
+              </div>
+              <div class="app-label">Pantalla de marcador</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:var(--panel);">
+                <img src="/src/assets/de-billar%20(1).png" width="90" height="90" style="object-fit:contain;" alt="Ícono de app Libre">
+              </div>
+              <div class="app-label">Ícono de app</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:var(--panel);">
+                <img src="/src/assets/app.jpeg" width="100%" height="170" style="object-fit:contain;" alt="Aplicación Libre en tablero de TV del club">
+              </div>
+              <div class="app-label">Tablero de TV del club</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:transparent;">
+                <img src="/src/assets/camiseta.png" width="100%" height="170" style="object-fit:contain;" alt="Camiseta de torneo Libre">
+              </div>
+              <div class="app-label">Camiseta de torneo</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:var(--panel);">
+                <svg width="80" height="100" viewBox="0 0 80 100"><rect x="6" y="6" width="68" height="88" rx="8" fill="var(--ink)" stroke="var(--line-soft)" stroke-width="2"/><image href="/src/assets/monocromatica.svg" x="18" y="16" width="44" height="31"/><rect x="16" y="58" width="48" height="6" rx="3" fill="var(--text)"/><rect x="16" y="70" width="32" height="6" rx="3" fill="var(--text-dim)"/><rect x="16" y="82" width="40" height="8" rx="4" fill="var(--yellow-ball)"/></svg>
+              </div>
+              <div class="app-label">Carné de jugador</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="app-card">
+              <div class="app-preview" style="background:var(--panel);">
+                <svg width="170" height="70" viewBox="0 0 170 70">
+                  <rect x="4" y="4" width="162" height="62" rx="14" fill="var(--ink)" stroke="var(--line-soft)" stroke-width="2"/>
+                  <circle cx="30" cy="35" r="12" fill="var(--yellow-ball)"/>
+                  <text x="30" y="40" font-family="Poppins" font-size="12" font-weight="700" fill="#20272A" text-anchor="middle">+1</text>
+                  <text x="52" y="30" font-family="Inter" font-size="9" font-weight="600" fill="var(--text)">Nueva carambola</text>
+                  <text x="52" y="44" font-family="Inter" font-size="8" fill="var(--text-dim)">Mesa 3 · vas 29</text>
+                </svg>
+              </div>
+              <div class="app-label">Notificación</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bg-panel" id="p9">
+    <div class="panel-inner">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center gy-5">
+          <div class="col-lg-7">
+            <div class="eyebrow-tag"><span class="dot"></span>Cierre</div>
+            <p class="closing-line">Tú juega. Nosotros contamos.</p>
+          </div>
+          <div class="col-lg-5">
+            <p style="color:var(--text-dim); margin-bottom:1.4rem;">Este manual reúne las reglas mínimas para que la marca libre se vea igual de precisa en cualquier mesa, club o pantalla que la use.</p>
+            <div class="d-flex flex-wrap gap-3 mb-4">
+              <a class="btn-carambola" href="/src/assets/logo-libre.svg" download>Descargar logo</a>
+            </div>
+            <p style="color:var(--text-dim); margin-bottom:.7rem;">¿Quieres probar Libre como aplicación en tu celular?</p>
+            <p style="color:var(--text-dim); font-size:.92rem; margin-bottom:1rem;">Abre Libre en la web y podrás instalarla como una aplicación en tu dispositivo. No necesitas descargar un APK: desde el menú del navegador elige “Instalar aplicación” o “Agregar a pantalla de inicio”.</p>
+            <div class="d-flex flex-wrap gap-3 mb-4">
+              <a class="btn-carambola" href="https://libres-pwa-tew5.vercel.app/" target="_blank" rel="noopener noreferrer">Probar Libre</a>
+            </div>
+            <p style="color:var(--text-dim); font-size:.92rem;">Librest@bogo.co</p>
+            <footer class="foot" style="margin-top:2rem;">Proyecto académico — Diseño de Identidad Visual, 2026.</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="overlay" aria-hidden="true">
+  <div class="wipe-circle" id="wipe"></div>
+
+  <div class="piece" id="cuePiece">
+    <div id="cueRotor" style="position:absolute; left:0; top:0; width:100%; height:100%;">
+      <svg viewBox="0 0 300 40" preserveAspectRatio="none">
+        <path d="M2,20 L230,11 L230,29 Z" fill="var(--graphite)"/>
+        <rect x="228" y="6" width="66" height="28" rx="13" fill="var(--graphite)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ballpiece piece" id="ballWhite">
+    <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23" fill="#F3F1EC" stroke="#D9D6CC" stroke-width="2"/></svg>
+  </div>
+  <div class="ballpiece piece" id="ballA">
+    <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23" fill="#DB4B3E"/></svg>
+  </div>
+  <div class="ballpiece piece" id="ballB">
+    <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23" fill="#EFB53F"/></svg>
+  </div>
+</div>
+
+<script>
+(function(){
+  const sections = Array.from(document.querySelectorAll('.panel'));
+  const dots = Array.from(document.querySelectorAll('#dotnav button'));
+  const overlay = document.getElementById('overlay');
+  const wipe = document.getElementById('wipe');
+  const cuePiece = document.getElementById('cuePiece');
+  const cueRotor = document.getElementById('cueRotor');
+  const ballWhite = document.getElementById('ballWhite');
+  const ballA = document.getElementById('ballA');
+  const ballB = document.getElementById('ballB');
+
+  let current = 0;
+  let animating = false;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const accents = ['#12181A','#DB4B3E','#EFB53F','#F3F1EC','#6B7075','#12181A','#DB4B3E','#EFB53F','#F3F1EC','#3F4245'];
+  const F_WHITE = { x:0.40, y:0.55 };
+  const F_A     = { x:0.60, y:0.40 };
+  const F_B     = { x:0.78, y:0.62 };
+
+  function wait(ms){ return new Promise(r=>setTimeout(r, ms)); }
+  function px(fracX, fracY){ return { x: window.innerWidth*fracX, y: window.innerHeight*fracY }; }
+  function updateDots(){ dots.forEach((d,i)=> d.classList.toggle('active', i===current)); }
+  function placeBall(el, fx, fy, opacity){
+    el.style.left = (window.innerWidth*fx - 26) + 'px';
+    el.style.top  = (window.innerHeight*fy - 26) + 'px';
+    el.style.opacity = opacity;
+  }
+  function resetOverlayPieces(){
+    [cuePiece, ballWhite, ballA, ballB].forEach(el=>{ el.style.transition = 'none'; el.style.opacity = 0; });
+    placeBall(ballWhite, F_WHITE.x, F_WHITE.y, 0);
+    placeBall(ballA, F_A.x, F_A.y, 0);
+    placeBall(ballB, F_B.x, F_B.y, 0);
+    wipe.style.transition = 'none';
+    wipe.style.left = (F_B.x*100)+'vw';
+    wipe.style.top = (F_B.y*100)+'vh';
+    wipe.style.transform = 'translate(-50%,-50%) scale(0)';
+  }
+
+  function setupCue(targetPx){
+    const W = window.innerWidth, H = window.innerHeight;
+    const sx = -0.16*W, sy = 1.06*H;
+    const dx = targetPx.x - sx, dy = targetPx.y - sy;
+    const fullDist = Math.hypot(dx, dy);
+    const ux = dx/fullDist, uy = dy/fullDist;
+    const angleDeg = Math.atan2(dy,dx)*180/Math.PI + 180;
+    const cueLen = Math.max(360, Math.min(W,H)*0.6);
+    const cueH = cueLen*(40/300);
+
+    cuePiece.style.width = cueLen+'px';
+    cuePiece.style.height = cueH+'px';
+    cuePiece.style.left = sx+'px';
+    cuePiece.style.top = (sy - cueH/2)+'px';
+    cueRotor.style.transformOrigin = '0% 50%';
+    cueRotor.style.transform = `rotate(${angleDeg}deg)`;
+    cuePiece.style.opacity = 1;
+
+    const travelDist = fullDist - 26 - 6;
+    const endX = sx + ux*travelDist, endY = sy + uy*travelDist;
+    return { endX, endY, cueH };
+  }
+
+  async function playCarambola(nextIndex){
+    resetOverlayPieces();
+    void overlay.offsetWidth;
+    overlay.classList.add('show');
+
+    const targetPx = px(F_WHITE.x, F_WHITE.y);
+    const { endX, endY, cueH } = setupCue(targetPx);
+    ballWhite.style.opacity = 1;
+    ballA.style.opacity = 1;
+    ballB.style.opacity = 1;
+
+    cuePiece.style.transition = 'left 380ms cubic-bezier(.3,.7,.3,1), top 380ms cubic-bezier(.3,.7,.3,1)';
+    void cuePiece.offsetWidth;
+    cuePiece.style.left = endX+'px';
+    cuePiece.style.top = (endY - cueH/2)+'px';
+    await wait(380);
+    cuePiece.style.transition = 'opacity 130ms ease';
+    cuePiece.style.opacity = 0;
+
+    const pA = px(F_A.x, F_A.y);
+    ballWhite.style.transition = 'left 300ms ease-in, top 300ms ease-in';
+    void ballWhite.offsetWidth;
+    ballWhite.style.left = (pA.x-26)+'px';
+    ballWhite.style.top = (pA.y-26)+'px';
+    await wait(300);
+
+    ballA.style.transition = 'left 320ms ease-in, top 320ms ease-in, transform 320ms ease-in, opacity 320ms ease-in';
+    void ballA.offsetWidth;
+    ballA.style.left = (pA.x+0.22*window.innerWidth-26)+'px';
+    ballA.style.top  = (pA.y-0.24*window.innerHeight-26)+'px';
+    ballA.style.transform = 'rotate(140deg)';
+    ballA.style.opacity = 0;
+
+    const pB = px(F_B.x, F_B.y);
+    ballWhite.style.transition = 'left 320ms ease-in, top 320ms ease-in';
+    void ballWhite.offsetWidth;
+    ballWhite.style.left = (pB.x-26)+'px';
+    ballWhite.style.top = (pB.y-26)+'px';
+    await wait(320);
+
+    ballB.style.transition = 'left 340ms ease-in, top 340ms ease-in, transform 340ms ease-in, opacity 340ms ease-in';
+    void ballB.offsetWidth;
+    ballB.style.left = (pB.x+0.17*window.innerWidth-26)+'px';
+    ballB.style.top  = (pB.y+0.20*window.innerHeight-26)+'px';
+    ballB.style.transform = 'rotate(-120deg)';
+    ballB.style.opacity = 0;
+
+    ballWhite.style.transition = 'opacity 200ms ease';
+    ballWhite.style.opacity = 0;
+
+    wipe.style.left = pB.x+'px';
+    wipe.style.top = pB.y+'px';
+    wipe.style.background = accents[nextIndex % accents.length];
+    wipe.style.transition = 'transform 460ms cubic-bezier(.2,.8,.2,1)';
+    void wipe.offsetWidth;
+    wipe.style.transform = 'translate(-50%,-50%) scale(1)';
+    await wait(460);
+  }
+
+  async function reduceMotionSwap(){
+    overlay.classList.add('show');
+    wipe.style.transition = 'none';
+    wipe.style.left = '50vw'; wipe.style.top = '50vh';
+    wipe.style.background = '#12181A';
+    wipe.style.transform = 'translate(-50%,-50%) scale(0.02)';
+    void wipe.offsetWidth;
+    wipe.style.transition = 'transform 220ms ease, opacity 220ms ease';
+    wipe.style.transform = 'translate(-50%,-50%) scale(1)';
+    await wait(220);
+  }
+
+  async function shrinkWipe(){
+    const dur = reduced ? 200 : 420;
+    wipe.style.transition = 'transform '+dur+'ms cubic-bezier(.2,.8,.2,1)';
+    void wipe.offsetWidth;
+    wipe.style.transform = wipe.style.transform.replace('scale(1)', 'scale(0.02)');
+    await wait(dur);
+    overlay.classList.remove('show');
+  }
+
+  function innerOf(i){ return sections[i].querySelector('.panel-inner'); }
+  async function goTo(nextIndex){
+    if(animating || nextIndex === current || nextIndex < 0 || nextIndex >= sections.length) return;
+    animating = true;
+    if(reduced){ await reduceMotionSwap(); } else { await playCarambola(nextIndex); }
+
+    sections[current].classList.remove('active');
+    sections[nextIndex].classList.add('active');
+    sections[nextIndex].querySelector('.panel-inner').scrollTop = 0;
+    current = nextIndex;
+    updateDots();
+
+    await shrinkWipe();
+    animating = false;
+  }
+
+  document.addEventListener('wheel', function(e){
+    if(animating){ e.preventDefault(); return; }
+    const inner = innerOf(current);
+    const atTop = inner.scrollTop <= 1;
+    const atBottom = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 1;
+    if(e.deltaY > 12 && atBottom){ e.preventDefault(); goTo(current+1); }
+    else if(e.deltaY < -12 && atTop){ e.preventDefault(); goTo(current-1); }
+  }, { passive:false });
+
+  document.addEventListener('keydown', function(e){
+    if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){ e.preventDefault(); goTo(current+1); }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){ e.preventDefault(); goTo(current-1); }
+  });
+
+  let touchStartY = null;
+  document.addEventListener('touchstart', function(e){ touchStartY = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(touchStartY === null || animating) return;
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    touchStartY = null;
+    if(Math.abs(dy) < 46) return;
+    const inner = innerOf(current);
+    const atTop = inner.scrollTop <= 1;
+    const atBottom = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 1;
+    if(dy > 0 && atBottom) goTo(current+1);
+    else if(dy < 0 && atTop) goTo(current-1);
+  }, {passive:true});
+
+  dots.forEach((d,i)=> d.addEventListener('click', ()=> goTo(i)));
+  resetOverlayPieces();
+})();
+</script>
+</body>
+</html>
